@@ -9,6 +9,7 @@ print(Linear(1, 2, 3, 4))
 print(InQuad(5, 6, 7, 8))
 
 print(package.path)
+-- local utf8 = require 'lua-utf8'
 -- local a = '一二三四'
 -- print( "中文" .. #a) -- 銝剜?12
 
@@ -36,4 +37,4 @@ repeat
     for i = 1, #user_input_str do
         input_tbl[#input_tbl + 1] = tonumber(string.sub(user_input_str, i, i))
     end
-until Check_Game_End(rand_tbl, input_tbl)
+until Check_Game_End_leave_loop(rand_tbl, input_tbl)
