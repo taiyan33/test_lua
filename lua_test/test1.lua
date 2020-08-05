@@ -25,7 +25,7 @@ function InQuad(t, b, c, d)
     return c * t ^ 2 + b
 end
 
--- no use
+-- deprecate
 function Get_diff_4_Number()
     math.randomseed(os.time())
     local n1 = math.random(1, 9)
@@ -44,8 +44,7 @@ function Get_diff_4_Number()
     return n1, n2, n3, n4
 end
 
-
-function Get_diff_4_Number_use_shuffle()
+Get_diff_4_Number_use_shuffle = function()
     local Shuffle_tbl = Shuffle_number({0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
     return table.unpack(Shuffle_tbl, 1, 4)
 end
@@ -59,7 +58,7 @@ function Shuffle_number(list_tbl)
     return list_tbl
 end
 
-function Check_Game_End(rand_tbl, input_tbl)
+Check_A_B_number = function(rand_tbl, input_tbl)
     local right_num_right_pos = 0
     local right_num_wrong_pos = 0
     for i = 1, #rand_tbl do
@@ -71,11 +70,31 @@ function Check_Game_End(rand_tbl, input_tbl)
             end
         end
     end
-    print(right_num_right_pos .. ' A ' .. right_num_wrong_pos .. ' B')
+    return right_num_right_pos, right_num_wrong_pos
+end
 
+ShowGameResult = function(right_num_right_pos, right_num_wrong_pos)
+    print(right_num_right_pos .. ' A ' .. right_num_wrong_pos .. ' B')
+end
+
+Check_game_complete = function(right_num_right_pos)
     if right_num_right_pos == 4 then
         return true
     end
 
     return false
+end
+
+local Game_Rule_List = {}
+Game_Rule_List[#Game_Rule_List + 1] = Get_diff_4_Number_use_shuffle
+Game_Rule_List[#Game_Rule_List + 1] = Check_A_B_number
+Game_Rule_List[#Game_Rule_List + 1] = ShowGameResult
+Game_Rule_List[#Game_Rule_List + 1] = Check_game_complete
+
+function Check_Game_End_leave_loop(rand_tbl, input_tbl)
+    local right_num_right_pos, right_num_wrong_pos = Game_Rule_List[2](rand_tbl, input_tbl)
+
+    Game_Rule_List[3](right_num_right_pos, right_num_wrong_pos)
+
+    return Game_Rule_List[4](right_num_right_pos)
 end
