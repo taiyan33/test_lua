@@ -10,14 +10,18 @@ print(InQuad(5, 6, 7, 8))
 
 print(package.path)
 
-local randNum1, randNum2, randNum3, randNum4 = Get_diff_4_Number()
-local rand_tbl = {randNum1, randNum2, randNum3, randNum4}
-for i = 1, #rand_tbl do
-    io.write(' ' .. rand_tbl[i] .. '\t')
-end
-print()
+-- local randNum1, randNum2, randNum3, randNum4 = Get_diff_4_Number()
+-- local randNum1, randNum2, randNum3, randNum4 = Get_diff_4_Number_use_shuffle()
+-- local rand_tbl = {randNum1, randNum2, randNum3, randNum4}
+local rand_tbl = {Get_diff_4_Number_use_shuffle()}
+
+print(table.concat(rand_tbl,"\t"))
+-- print(table.unpack(rand_tbl, 1, 4))
+-- for i = 1, #rand_tbl do
+--     io.write(' ' .. rand_tbl[i] .. '\t')
+-- end
 repeat
-    io.write('enter number 1~9:')
+    io.write('enter 4 number between 1~9:')
     for i = 1, #rand_tbl do
         io.write(' ' .. rand_tbl[i] .. ' ')
     end
@@ -30,5 +34,4 @@ repeat
     for i = 1, #user_input_str do
         input_tbl[#input_tbl + 1] = tonumber(string.sub(user_input_str, i, i))
     end
-
-until Check_Game_End( rand_tbl ,input_tbl)
+until Check_Game_End(rand_tbl, input_tbl)

@@ -25,6 +25,7 @@ function InQuad(t, b, c, d)
     return c * t ^ 2 + b
 end
 
+-- no use
 function Get_diff_4_Number()
     math.randomseed(os.time())
     local n1 = math.random(1, 9)
@@ -41,6 +42,21 @@ function Get_diff_4_Number()
         n4 = math.random(1, 9)
     until (n4 ~= n1 and n4 ~= n2 and n4 ~= n3)
     return n1, n2, n3, n4
+end
+
+
+function Get_diff_4_Number_use_shuffle()
+    local Shuffle_tbl = Shuffle_number({0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+    return table.unpack(Shuffle_tbl, 1, 4)
+end
+
+function Shuffle_number(list_tbl)
+    math.randomseed(os.time())
+    for i = #list_tbl, 2, -1 do
+        local j = math.random(i)
+        list_tbl[i], list_tbl[j] = list_tbl[j], list_tbl[i]
+    end
+    return list_tbl
 end
 
 function Check_Game_End(rand_tbl, input_tbl)
