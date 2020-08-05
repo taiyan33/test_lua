@@ -9,13 +9,15 @@ print(Linear(1, 2, 3, 4))
 print(InQuad(5, 6, 7, 8))
 
 print(package.path)
+-- local a = '一二三四'
+-- print( "中文" .. #a) -- 銝剜?12
 
 -- local randNum1, randNum2, randNum3, randNum4 = Get_diff_4_Number()
 -- local randNum1, randNum2, randNum3, randNum4 = Get_diff_4_Number_use_shuffle()
 -- local rand_tbl = {randNum1, randNum2, randNum3, randNum4}
 local rand_tbl = {Get_diff_4_Number_use_shuffle()}
 
-print(table.concat(rand_tbl,"\t"))
+print(table.concat(rand_tbl, '\t'))
 -- print(table.unpack(rand_tbl, 1, 4))
 -- for i = 1, #rand_tbl do
 --     io.write(' ' .. rand_tbl[i] .. '\t')
