@@ -44,18 +44,19 @@ function Get_diff_4_Number()
     return n1, n2, n3, n4
 end
 
-Get_diff_4_Number_use_shuffle = function()
-    local Shuffle_tbl = Shuffle_number({0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
-    return table.unpack(Shuffle_tbl, 1, 4)
-end
-
-function Shuffle_number(list_tbl)
+local function Shuffle_number(list_tbl)
     math.randomseed(os.time())
     for i = #list_tbl, 2, -1 do
         local j = math.random(i)
         list_tbl[i], list_tbl[j] = list_tbl[j], list_tbl[i]
     end
     return list_tbl
+end
+
+-- only invoke function Shuffle_number before definition
+Get_diff_4_Number_use_shuffle = function()
+    local Shuffle_tbl = Shuffle_number({0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+    return table.unpack(Shuffle_tbl, 1, 4)
 end
 
 Check_A_B_number = function(rand_tbl, input_tbl)
