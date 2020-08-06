@@ -56,7 +56,13 @@ end
 -- only invoke function Shuffle_number before definition
 Get_diff_4_Number_use_shuffle = function()
     local Shuffle_tbl = Shuffle_number({0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
-    return table.unpack(Shuffle_tbl, 1, 4)
+
+    -- lua 5.1 版以前使用 unpack
+    if tonumber(string.sub(_VERSION, 5, 7)) <= 5.1 then
+        return unpack(Shuffle_tbl, 1, 4)
+    else
+        return table.unpack(Shuffle_tbl, 1, 4)
+    end
 end
 
 local Check_A_B_number = function(rand_tbl, input_tbl)
