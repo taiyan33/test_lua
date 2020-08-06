@@ -59,7 +59,7 @@ Get_diff_4_Number_use_shuffle = function()
     return table.unpack(Shuffle_tbl, 1, 4)
 end
 
-Check_A_B_number = function(rand_tbl, input_tbl)
+local Check_A_B_number = function(rand_tbl, input_tbl)
     local right_num_right_pos = 0
     local right_num_wrong_pos = 0
     for i = 1, #rand_tbl do
@@ -74,11 +74,11 @@ Check_A_B_number = function(rand_tbl, input_tbl)
     return right_num_right_pos, right_num_wrong_pos
 end
 
-ShowGameResult = function(right_num_right_pos, right_num_wrong_pos)
+local ShowGameResult = function(right_num_right_pos, right_num_wrong_pos)
     print(right_num_right_pos .. ' A ' .. right_num_wrong_pos .. ' B')
 end
 
-Check_game_complete = function(right_num_right_pos)
+local Check_game_complete = function(right_num_right_pos)
     if right_num_right_pos == 4 then
         return true
     end
@@ -87,7 +87,9 @@ Check_game_complete = function(right_num_right_pos)
 end
 
 local Game_Rule_List = {}
+Game_Rule_List[#Game_Rule_List + 1] = user_input
 Game_Rule_List[#Game_Rule_List + 1] = Get_diff_4_Number_use_shuffle
+Game_Rule_List[#Game_Rule_List + 1] = Check_Game_End_leave_loop
 Game_Rule_List[#Game_Rule_List + 1] = Check_A_B_number
 Game_Rule_List[#Game_Rule_List + 1] = ShowGameResult
 Game_Rule_List[#Game_Rule_List + 1] = Check_game_complete
@@ -98,4 +100,20 @@ function Check_Game_End_leave_loop(rand_tbl, input_tbl)
     Game_Rule_List[3](right_num_right_pos, right_num_wrong_pos)
 
     return Game_Rule_List[4](right_num_right_pos)
+end
+
+user_input = function(myrand_tbl)
+    io.write('enter 4 number between 1~9:')
+    for i = 1, #myrand_tbl do
+        io.write(' ' .. myrand_tbl[i] .. ' ')
+    end
+    io.write(': ')
+    local user_input_str = io.read()
+    -- local user_input_str = 1234
+
+    local input_tbl = {}
+    for i = 1, #user_input_str do
+        input_tbl[#input_tbl + 1] = tonumber(string.sub(user_input_str, i, i))
+    end
+    return input_tbl
 end

@@ -7,7 +7,7 @@ local b = 456
 print(Linear(1, 2, 3, 4))
 
 print(InQuad(5, 6, 7, 8))
-
+-- require("json")
 print(package.path)
 -- local utf8 = require 'lua-utf8'
 -- local a = '一二三四'
@@ -24,17 +24,5 @@ print(table.concat(rand_tbl, '\t'))
 --     io.write(' ' .. rand_tbl[i] .. '\t')
 -- end
 repeat
-    io.write('enter 4 number between 1~9:')
-    for i = 1, #rand_tbl do
-        io.write(' ' .. rand_tbl[i] .. ' ')
-    end
-    io.write(': ')
-    local user_input = io.read()
-    -- local user_input = 1234
-    local user_input_str = tostring(user_input)
-
-    local input_tbl = {}
-    for i = 1, #user_input_str do
-        input_tbl[#input_tbl + 1] = tonumber(string.sub(user_input_str, i, i))
-    end
+    local input_tbl = user_input(rand_tbl)
 until Check_Game_End_leave_loop(rand_tbl, input_tbl)
